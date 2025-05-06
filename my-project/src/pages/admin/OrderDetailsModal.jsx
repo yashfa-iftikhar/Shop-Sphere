@@ -16,7 +16,7 @@ const OrdersAdmin = () => {
 
     const getBuyerDetails = async (buyerId) => {
         try {
-            const { data } = await axios.get(`http://server:3000/api/v1/auth/user/${buyerId}`);
+            const { data } = await axios.get(`http://import.meta.env.VITE_BACKEND_URL/api/v1/auth/user/${buyerId}`);
             if (data?.success) {
                 setBuyers((prevBuyers) => ({
                     ...prevBuyers,
@@ -31,7 +31,7 @@ const OrdersAdmin = () => {
     const getAllOrders = async () => {
         try {
             setLoading(true);
-            const { data } = await axios.get('http://server:3000/api/v1/order/get-all-orders');
+            const { data } = await axios.get('http://import.meta.env.VITE_BACKEND_URL/api/v1/order/get-all-orders');
             if (data?.success) {
                 setOrders(data.orders);
             }

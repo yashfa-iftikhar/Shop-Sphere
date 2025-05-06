@@ -15,7 +15,7 @@ const Users = () => {
   const getAllUsers = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get('http://server:3000/api/v1/auth/total-users');
+      const { data } = await axios.get('http://import.meta.env.VITE_BACKEND_URL/api/v1/auth/total-users');
       console.log(data);
       if (data?.success) {
         setUsers(data?.total);

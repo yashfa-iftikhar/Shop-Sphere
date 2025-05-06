@@ -13,7 +13,7 @@ export default function AdminRoute() {
     useEffect(() => {
         const authCheck = async () => {
             try {
-                const res = await axios.get('http://server:3000/api/v1/auth/admin-auth', {
+                const res = await axios.get('http://import.meta.env.VITE_BACKEND_URL/api/v1/auth/admin-auth', {
                     headers: {
                         Authorization: auth?.token, 
                     },

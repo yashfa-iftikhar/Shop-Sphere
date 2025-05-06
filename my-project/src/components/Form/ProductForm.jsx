@@ -66,7 +66,7 @@ const ProductForm = ({ handleSubmit, categories, initialValues = {} }) => {
                             <div>
                                 <img 
                                 alt=""
-                                src={`http://server:3000/api/v1/product/product-photo/${initialValues._id}`}
+                                src={`http://import.meta.env.VITE_BACKEND_URL/api/v1/product/product-photo/${initialValues._id}`}
                                 width="100"
                                 height="100"
                                 />

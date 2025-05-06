@@ -11,7 +11,7 @@ export default function PrivateRoute(){
 
     useEffect(() => {
         const authCheck = async() =>{
-            const res = await axios.get('http://server:3000/api/v1/auth/user-auth')
+            const res = await axios.get('http://import.meta.env.VITE_BACKEND_URL/api/v1/auth/user-auth')
             if (res.data.ok){
                 setOk(true)
             }

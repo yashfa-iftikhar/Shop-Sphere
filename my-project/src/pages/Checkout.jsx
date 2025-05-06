@@ -34,7 +34,7 @@ const Checkout = () => {
             }
 
             const { data } = await axios.post(
-                'http://server:3000/api/v1/order/create-order',
+                'http://import.meta.env.VITE_BACKEND_URL/api/v1/order/create-order',
                 orderData
             )
 

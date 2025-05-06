@@ -11,7 +11,7 @@ const SearchInput = () =>{
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const {data} = await axios.get(`http://server:3000/api/v1/product/search/${values.keyword}`)
+            const {data} = await axios.get(`http://import.meta.env.VITE_BACKEND_URL/api/v1/product/search/${values.keyword}`)
             console.log(data)
             console.log(values)
             setValues({...values, results: data})

@@ -17,7 +17,7 @@ const ForgotPassword = () => {
         setError(null);
         setSuccess(null);
         try {
-            const res = await axios.post('http://server:3000/api/v1/auth/forgot', { email, answer, newPassword });
+            const res = await axios.post('http://import.meta.env.VITE_BACKEND_URL/api/v1/auth/forgot', { email, answer, newPassword });
             if (res.data.success) {
                 setSuccess("Password was successfully changed");
                 setTimeout(() => navigate('/login'), 3000); 

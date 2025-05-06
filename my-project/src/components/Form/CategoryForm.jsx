@@ -53,7 +53,7 @@ const CategoryForm = ({ handleSubmit, initialValues = {} }) => {
                             ) : initialValues._id ? (
                                 <div>
                                     <img 
-                                        src={`http://server:3000/api/v1/category/category-photo/${initialValues._id}`}
+                                        src={`http://import.meta.env.VITE_BACKEND_URL/api/v1/category/category-photo/${initialValues._id}`}
                                         alt="Current category"
                                         width="100"
                                         height="100"

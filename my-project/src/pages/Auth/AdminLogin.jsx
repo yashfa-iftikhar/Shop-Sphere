@@ -18,7 +18,7 @@ const AdminLogin = () => {
         setError(null);
         setSuccess(null);
         try {
-            const res = await axios.post('http://server:3000/api/v1/auth/admin', { name, password });
+            const res = await axios.post('http://import.meta.env.VITE_BACKEND_URL/api/v1/auth/admin', { name, password });
             if (res.data.success) {
                 setSuccess("Login successful! Redirecting to admin dashboard...");
                 localStorage.setItem('adminToken', res.data.token);

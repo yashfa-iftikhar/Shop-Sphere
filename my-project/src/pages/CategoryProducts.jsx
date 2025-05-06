@@ -14,7 +14,7 @@ const CategoryProducts = () => {
     
     const getProductsByCat = async () => {
         try {
-            const { data } = await axios.get(`http://server:3000/api/v1/product/products-category/${params.slug}`)
+            const { data } = await axios.get(`http://import.meta.env.VITE_BACKEND_URL/api/v1/product/products-category/${params.slug}`)
             setProducts(data?.products)
             setCategory(data?.category)
         } catch (error) {
