@@ -1,43 +1,37 @@
 version: '3.8'
-
 services:
-  server:
+  backend:
     build:
       context: ./server
       dockerfile: Dockerfile
+    container_name: shop_sphere_backend
     ports:
       - "3000:3000"
     environment:
-      - MONGO_URL=mongodb://mongo:27017/ecommerce # Changed to match the service name
-    depends_on:
-      - mongo
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - ./server:/app
     networks:
-      - mern-network
+      - shop-sphere-network
 
   frontend:
     build:
       context: ./my-project
       dockerfile: Dockerfile
+    container_name: shop_sphere_frontend
     ports:
       - "5000:5000"
-    depends_on:
-      - server
-    networks:
-      - mern-network
-
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
     volumes:
-      - mongo-data:/data/db
+      - ./my-project:/app
+    depends_on:
+      - backend
     networks:
-      - mern-network
+      - shop-sphere-network
 
 networks:
-  mern-network:
+  shop-sphere-network:
     driver: bridge
-
-volumes:
-  mongo-data:
-    driver: local
