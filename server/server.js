@@ -6,11 +6,23 @@ const categoryRoutes = require('./routes/categoryRoutes')
 const productRoutes = require('./routes/productRoute')
 const orderRoute = require('./routes/orderRoute')
 const cors = require('cors');
+const mongoose = require('mongoose');
 const app = express();
  
 dotenv.config();
+
+const uri = process.env.MONGODB_URI;
+
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error(err));
 app.use(express.static(path.join(__dirname, ' public')));
-app.use(cors());
+app.use(cors({
+  origin: 'http://16.171.24.108:5000', // Adjust this to your frontend URL
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 

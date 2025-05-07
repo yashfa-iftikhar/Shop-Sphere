@@ -66,7 +66,7 @@ const Cart = () => {
               {cartItems.map((item) => (
                 <div key={item._id} className="flex flex-col sm:flex-row items-center bg-white rounded-lg shadow-md p-4 mb-4">
                   <img
-                    src={`http://import.meta.env.VITE_BACKEND_URL/api/v1/product/product-photo/${item._id}`}
+                    src={`http://16.171.24.108:3000/api/v1/product/product-photo/${item._id}`}
                     alt={item.name}
                     className="w-full sm:w-32 h-32 object-cover rounded-md mb-4 sm:mb-0 sm:mr-4"
                   />

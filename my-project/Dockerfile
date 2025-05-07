@@ -1,10 +1,25 @@
-FROM node:20
+# Stage 1: Build
+FROM node:20-alpine AS builder
+
 WORKDIR /app
+
 COPY package*.json ./
 RUN npm install
-RUN npm install -g serve
+
 COPY . .
-RUN npm run build
+RUN NODE_OPTIONS="--max-old-space-size=1024" npm run build
+
+# Stage 2: Serve
+FROM node:20-alpine
+
+RUN npm install -g serve
+
+WORKDIR /app
+
+COPY --from=builder /app/dist ./dist
+
 ENV PORT=5000
 EXPOSE 5000
+
 CMD ["serve", "-s", "dist", "-l", "5000"]
+

@@ -22,7 +22,7 @@ const Register = () => {
         setError(null); 
         setSuccess(null);
         try {
-            const res = await axios.post('http://import.meta.env.VITE_BACKEND_URL/api/v1/auth/register', { name, email, password, phone, address, answer });
+            const res = await axios.post('http://16.171.24.108:3000/api/v1/auth/register', { name, email, password, phone, address, answer });
             if (res.data.success) {
                 setSuccess("Registration successful! Redirecting to homepage...");
                 setTimeout(() => navigate('/'), 3000);

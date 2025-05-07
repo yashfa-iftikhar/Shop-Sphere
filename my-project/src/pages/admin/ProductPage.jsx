@@ -46,7 +46,7 @@ const ProductPage = () => {
               <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
                 {product.photo ? (
                   <img
-                    src={`http://import.meta.env.VITE_BACKEND_URL/api/v1/product/product-photo/${product._id}`}
+                    src={`http://16.171.24.108:3000/api/v1/product/product-photo/${product._id}`}
                     alt={product.name}
                     className="w-full h-full object-cover"
                   />
