@@ -9,7 +9,7 @@ import axios from 'axios';
 const CategoryCard = ({ category }) => {
   const categoryProductsCount = async () => {
     try {
-      const { data } = await axios.get(`http://16.171.24.108:3000/api/v1/product/count?categoryId=${category._id}`);
+      const { data } = await axios.get(`http://16.171.24.108:3100/api/v1/product/count?categoryId=${category._id}`);
       console.log(data)
       return data?.count;
     } catch (error) {
@@ -22,7 +22,7 @@ const CategoryCard = ({ category }) => {
       {/* Image Container */}
       <div className="relative aspect-w-16 aspect-h-9 bg-gray-200">
         <img
-          src={`http://16.171.24.108:3000/api/v1/category/category-photo/${category._id}`}
+          src={`http://16.171.24.108:3100/api/v1/category/category-photo/${category._id}`}
           alt={category.name}
           className="w-full h-80 object-cover overflow-hidden transition-transform duration-300 group-hover:scale-105"
           onError={(e) => {

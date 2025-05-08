@@ -19,7 +19,7 @@ const Login = () => {
         setError(null);
         setSuccess(null);
         try {
-            const res = await axios.post('http://16.171.24.108:3000/api/v1/auth/login', { email, password });
+            const res = await axios.post('http://16.171.24.108:3100/api/v1/auth/login', { email, password });
             if (res.data.success) {
                 setSuccess("Login successful! Redirecting to homepage...");
                 setTimeout(() => navigate('/'), 2000);

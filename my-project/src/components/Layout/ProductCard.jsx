@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
       <Toaster position="top-center" />
       <div className="relative">
         <img
-          src={`http://16.171.24.108:3000/api/v1/product/product-photo/${product._id}`}
+          src={`http://16.171.24.108:3100/api/v1/product/product-photo/${product._id}`}
           alt={product.name}
           className="w-full h-64 object-cover rounded-t-lg"
         />

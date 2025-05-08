@@ -12,18 +12,26 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker-compose -p $COMPOSE_PROJECT_NAME -f $COMPOSE_FILE build'
+                echo 'Building Docker containers...'
+                sh 'docker-compose -p $COMPOSE_PROJECT_NAME -f $COMPOSE_FILE build --no-cache'
+            }
+        }
+        stage('List Build Output') {
+            steps {
+                echo 'Checking frontend dist directory...'
+                sh 'ls -lah my-project/dist || echo "Dist folder not found"'
             }
         }
         stage('Deploy') {
             steps {
+                echo 'Starting containers...'
                 sh 'docker-compose -p $COMPOSE_PROJECT_NAME -f $COMPOSE_FILE up -d'
             }
         }
     }
     post {
         always {
-            echo 'Stopping containers...'
+            echo 'Cleaning up...'
             sh 'docker-compose -p $COMPOSE_PROJECT_NAME -f $COMPOSE_FILE down || true'
         }
     }
