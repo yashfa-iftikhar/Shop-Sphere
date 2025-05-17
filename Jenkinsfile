@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/umer-5/Shop-Sphere.git'
+                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/yashfa-iftikhar/Shop-Sphere'
             }
         }
 
