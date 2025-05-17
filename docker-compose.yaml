@@ -11,7 +11,11 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - MONGODB_URI=mongodb+srv://yashfa:<yashfadb>@cluster0.63xwdrn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      # Corrected Mongo URI without angle brackets, and added DB name (e.g., ShopSphere)
+      - MONGODB_URI=mongodb+srv://yashfa:yashfadb@cluster0.63xwdrn.mongodb.net/ShopSphere?retryWrites=true&w=majority&appName=Cluster0
+      - JWT_SECRETKEY=chintapaktamtam
+      - ADMIN_NAME=admin
+      - ADMIN_SECRET_KEY=devops123
     volumes:
       - ./server:/app
     networks:
