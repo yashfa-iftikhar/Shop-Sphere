@@ -21,7 +21,7 @@ mongoose.connect(uri, {
 .catch(err => console.error(err));
 app.use(express.static(path.join(__dirname, ' public')));
 app.use(cors({
-  origin: 'http://16.171.24.108:5100', // Adjust this to your frontend URL
+  origin: 'http://13.61.27.31:5100', // Adjust this to your frontend URL
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
