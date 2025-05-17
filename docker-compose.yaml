@@ -11,7 +11,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - MONGODB_URI=mongodb+srv://rumerjaved7:nZlh8VxWpiANvjh5@cluster0.dqasiyv.mongodb.net/ShopSphere?retryWrites=true&w=majority
+      - MONGODB_URI=mongodb+srv://yashfa:<yashfadb>@cluster0.63xwdrn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     volumes:
       - ./server:/app
     networks:
