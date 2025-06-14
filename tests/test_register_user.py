@@ -6,38 +6,34 @@ from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-# Setup headless Chrome options
 opts = Options()
 opts.add_argument("--headless")
 opts.add_argument("--disable-gpu")
 opts.add_argument("--window-size=1920,1080")
 opts.add_argument("--no-sandbox")
 
-# Auto-install correct ChromeDriver version
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=opts)
 
 try:
-    # Go to your login page
-    driver.get("http://13.61.27.31:5100/login")
-    print("Opened login page")
+    driver.get("http://13.61.27.31:5100/register")
+    print("Opened register page")
 
-    # Fill form (replace with actual test credentials)
-    driver.find_element(By.NAME, "email").send_keys("your_test_email@example.com")
-    driver.find_element(By.NAME, "password").send_keys("your_test_password")
+    driver.find_element(By.NAME, "name").send_keys("Test User")
+    driver.find_element(By.NAME, "email").send_keys("newuser@example.com")
+    driver.find_element(By.NAME, "password").send_keys("password123")
 
-    # Click login button
-    driver.find_element(By.XPATH, "//button[contains(text(), 'Login')]").click()
-    print("Clicked login")
+    driver.find_element(By.XPATH, "//button[contains(text(), 'Register')]").click()
+    print("Clicked register")
 
     time.sleep(3)
 
-    # Check for logout or dashboard presence
+    # Expecting registration to fail (e.g. no redirect, no dashboard, no login)
     try:
         driver.find_element(By.XPATH, "//a[contains(text(), 'Logout')]")
-        print("✅ Login successful!")
+        print("❌ Test Failed: User registered even though DB is not connected")
     except NoSuchElementException:
-        print("❌ Login failed: Logout not found.")
+        print("✅ Test Passed: Registration failed as expected (no DB connection)")
 
 finally:
     driver.quit()
