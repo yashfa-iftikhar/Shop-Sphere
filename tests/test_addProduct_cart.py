@@ -5,12 +5,15 @@ from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 import time
+import tempfile
 
 opts = Options()
-opts.add_argument("--headless")
+opts.add_argument("--headless=new")  # Use the new headless mode
 opts.add_argument("--disable-gpu")
-opts.add_argument("--window-size=1920,1080")
 opts.add_argument("--no-sandbox")
+opts.add_argument("--window-size=1920,1080")
+opts.add_argument("--disable-dev-shm-usage")
+opts.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")  # Unique temp user data dir
 
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=opts)
@@ -24,11 +27,9 @@ try:
         print("Clicked Add to Cart")
         time.sleep(2)
 
-        # Check if cart updated or item added
         driver.find_element(By.XPATH, "//a[contains(text(), 'Cart')]").click()
         print("Opened cart")
 
-        # Check if any product appears
         product = driver.find_element(By.CLASS_NAME, "cart-item")
         print("❌ Test Failed: Product added to cart despite missing backend")
     except NoSuchElementException:
