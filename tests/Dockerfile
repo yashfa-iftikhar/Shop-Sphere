@@ -22,7 +22,7 @@ WORKDIR /tests
 COPY . /tests
 
 # Install Python dependencies
-RUN pip install --no-cache-dir selenium webdriver-manager
+RUN pip install --no-cache-dir selenium webdriver-manager pytest
 
-# Default command
-CMD ["python", "test_login_valid.py"]
+# Run all tests
+CMD ["pytest"]
