@@ -16,7 +16,7 @@ service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=opts)
 
 try:
-    driver.get("http://13.61.27.31:5100/")
+    driver.get("http://16.171.162.11:5100/")
     print("Opened home page")
 
     try:
