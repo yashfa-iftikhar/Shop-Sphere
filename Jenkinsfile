@@ -49,10 +49,12 @@ pipeline {
         stage('Run Selenium Tests') {
             steps {
                 echo 'Running Selenium tests in Docker...'
-                sh '''
-                    docker build -t selenium-test -f selenium-tests/Dockerfile selenium-tests
-                    docker run --rm selenium-test
-                '''
+                dir('tests') {
+                    sh '''
+                        docker build -t selenium-test .
+                        docker run --rm selenium-test
+                    '''
+                }
             }
         }
     }
@@ -60,9 +62,6 @@ pipeline {
     post {
         always {
             echo 'Pipeline execution completed.'
-            // Keep containers running for inspection
         }
     }
 }
-
-
