@@ -4,12 +4,13 @@ pipeline {
     environment {
         COMPOSE_PROJECT_NAME = 'shop-sphere-jenkins'
         COMPOSE_FILE = 'docker-compose.yaml'
+        REPO_URL = 'https://github.com/yashfa-iftikhar/Shop-Sphere'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/yashfa-iftikhar/Shop-Sphere'
+                git branch: 'main', credentialsId: 'github-credentials', url: "${env.REPO_URL}"
             }
         }
 
@@ -44,13 +45,24 @@ pipeline {
                 sh 'docker-compose -p $COMPOSE_PROJECT_NAME -f $COMPOSE_FILE up -d'
             }
         }
+
+        stage('Run Selenium Tests') {
+            steps {
+                echo 'Running Selenium tests in Docker...'
+                sh '''
+                    docker build -t selenium-test -f selenium-tests/Dockerfile selenium-tests
+                    docker run --rm selenium-test
+                '''
+            }
+        }
     }
 
     post {
         always {
             echo 'Pipeline execution completed.'
-            // DO NOT shut down containers so they keep running for inspection
+            // Keep containers running for inspection
         }
     }
 }
+
 
