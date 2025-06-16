@@ -1,27 +1,32 @@
+# test_invalid_email_format.py
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 import time
-from utils import create_driver
 
-def test_invalid_email_format():
-    driver = create_driver()
+options = Options()
+options.add_argument("--headless")
 
-    try:
-        driver.get("http://13.61.27.31:5100/login")
-        print("Opened login page")
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
 
-        # Enter invalid email format and dummy password
-        driver.find_element(By.NAME, "email").send_keys("invalid-email")
-        driver.find_element(By.NAME, "password").send_keys("wrongpass")
+try:
+    driver.get("http://16.171.162.11:5100/login")
+    print("Opened login page")
 
-        driver.find_element(By.XPATH, "//button[contains(text(), 'Login')]").click()
-        print("Submitted form with invalid email format")
+    # Fill in invalid email and any password
+    driver.find_element(By.NAME, "email").send_keys("invalid-email")
+    driver.find_element(By.NAME, "password").send_keys("wrongpass")
 
-        time.sleep(2)
+    driver.find_element(By.XPATH, "//button[contains(text(), 'Login')]").click()
+    time.sleep(3)
 
-        if "login" in driver.current_url:
-            print("✅ Test Passed: Invalid email rejected (still on login page)")
-        else:
-            print("❌ Test Failed: Redirected despite invalid email format")
+    if "login" in driver.current_url:
+        print("✅ Invalid email format test passed")
+    else:
+        print("❌ Unexpected result after submitting invalid email format")
 
-    finally:
-        driver.quit()
+finally:
+    driver.quit()
