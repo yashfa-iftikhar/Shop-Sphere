@@ -14,7 +14,7 @@ service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=options)
 
 try:
-    driver.get("http://13.61.27.31:5100/login")
+    driver.get("http://16.171.162.11:5100/login")
     print("Opened login page with empty form")
 
     # Click login without entering anything
