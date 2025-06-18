@@ -1,15 +1,35 @@
-# tests/Dockerfile
+# Dockerfile
 
-FROM selenium/standalone-chrome:latest
+FROM node:20-slim
+
+# Install dependencies and Chrome
+RUN apt-get update && apt-get install -y \
+    wget \
+    curl \
+    gnupg \
+    ca-certificates \
+    fonts-liberation \
+    libappindicator3-1 \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libnspr4 \
+    libnss3 \
+    libxss1 \
+    xdg-utils \
+    libu2f-udev \
+    --no-install-recommends && \
+    wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt-get install -y ./google-chrome-stable_current_amd64.deb && \
+    rm google-chrome-stable_current_amd64.deb
 
 # Create app directory
-USER root
-WORKDIR /tests
-COPY . /tests
+WORKDIR /app
 
-# Install Python and dependencies
-RUN apt-get update && apt-get install -y python3 python3-pip \
-    && pip3 install --no-cache-dir selenium webdriver-manager pytest
+# Copy test project files
+COPY . .
 
-USER seluser
-CMD ["pytest", "--disable-warnings", "--maxfail=1"]
+# Install dependencies
+RUN npm install
+
+# Default command to run tests
+CMD ["npm", "test"]
