@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone Shop-Sphere-Tests') {
             steps {
-                git url: 'https://github.com/umer-5/Shop-Sphere-Tests.git', branch: 'main'
+                git url: 'https://github.com/yashfa-iftikhar/Shop-Sphere/tests, branch: 'main'
             }
         }
 
