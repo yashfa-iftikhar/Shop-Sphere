@@ -19,7 +19,7 @@ mongoose.connect(uri, {
 })
 .then(() => console.log('MongoDB connected!'))
 .catch(err => console.error(err));
-app.use(express.static(path.join(__dirname, ' public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
   origin: 'http://13.61.27.31:5100', // Adjust this to your frontend URL
 }));
